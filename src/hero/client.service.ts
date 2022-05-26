@@ -1,21 +1,22 @@
 import { Inject, Injectable, OnModuleInit } from "@nestjs/common";
 import { ClientGrpc } from "@nestjs/microservices";
 import { Hero } from "src/hero/interfaces/interfaces";
-import { HeroService } from "./hero.service";
+import { GrpcHeroService } from "./hero.controller";
 
 @Injectable()
-export class HeroClient implements OnModuleInit {
-  private heroService: HeroService;
+export class HeroClientService implements OnModuleInit {
+
+  private grpcHeroService: GrpcHeroService
 
   constructor(@Inject('HERO_PACKAGE') private client: ClientGrpc) {}
 
   onModuleInit() {
     console.log("onModuleInit")
-    this.heroService = this.client.getService<HeroService>('HeroService');
+    this.grpcHeroService = this.client.getService('HeroService')
   }
 
   getHero(): Hero {
     console.log("2. getHero")
-    return this.heroService.findOne({ id: 1 });
+    return this.grpcHeroService.findOne({ id: 1 });
   }
 }

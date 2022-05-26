@@ -1,14 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
-import { HeroClient } from './hero/client.controller';
+import { HeroClientService } from './hero/client.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly heroClient: HeroClient) {}
+  constructor(private readonly HeroClientService: HeroClientService) {}
 
   @Get("/")
   async getDataById(){
     console.log("1. getDataById")
-    return this.heroClient.getHero()
+    return this.HeroClientService.getHero()
   }
 
 }

@@ -1,19 +1,18 @@
-import { Metadata, ServerUnaryCall } from "@grpc/grpc-js";
-import { Controller } from "@nestjs/common";
-import { GrpcMethod } from "@nestjs/microservices";
+import { Injectable } from "@nestjs/common";
 import { Hero, HeroById } from "./interfaces/interfaces";
 
-@Controller()
+@Injectable()
 export class HeroService {
-  @GrpcMethod('HeroService')
-  findOne(data: HeroById, metadata?: Metadata, call?: ServerUnaryCall<any, any>): Hero {
+
+  findOne(data: HeroById): Hero {
     
-    console.log("Grpc Hero Service");
+    console.log("4. HeroService");
 
     const items = [
       { id: 1, name: 'Osama' },
       { id: 2, name: 'Osama' },
     ];
+
     return items.find(({ id }) => id === data.id);
   }
 }

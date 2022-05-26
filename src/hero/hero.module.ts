@@ -2,7 +2,8 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
 import { grpcClientOptions } from '../grpc-client.options';
-import { HeroClient } from './client.controller';
+import { HeroClientService } from './client.service';
+import { GrpcHeroService } from './hero.controller';
 import { HeroService } from './hero.service';
 
 @Module({
@@ -14,7 +15,8 @@ import { HeroService } from './hero.service';
       },
     ]),
   ],
-  providers: [HeroService, HeroClient],
-  exports: [HeroClient]
+  controllers: [GrpcHeroService],
+  providers: [HeroService, HeroClientService],
+  exports: [HeroClientService]
 })
 export class HeroModule {}
